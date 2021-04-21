@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+util = require 'util'
 Discord = require 'discord.js'
 
 inputDir = path.resolve("input")
@@ -18,7 +19,7 @@ send = (channelName, text) ->
   if channel?
     channel.send(text)
   else
-    console.log "Can't find channel: #{channelName}"
+    util.log "Can't find channel: #{channelName}"
   return
 
 checkForMessages = ->
@@ -46,14 +47,14 @@ main = ->
   discordConfig = JSON.parse(fs.readFileSync("shout.json", "utf8"))
   discordClient = new Discord.Client()
   discordClient.on 'ready', ->
-    console.log "Logged in: #{discordClient.user.tag}"
+    util.log "Logged in: #{discordClient.user.tag}"
     discordClient.guilds.fetch(discordConfig.guild).then (guild) ->
       discordGuild = guild
-      console.log "Server: #{discordGuild.name}"
-      console.log "Listening for messages here: #{inputDir}"
+      util.log "Server: #{discordGuild.name}"
+      util.log "Listening for messages here: #{inputDir}"
       setInterval onTick, (discordConfig.interval * 1000)
 
-  console.log "Logging in..."
+  util.log "Logging in..."
   discordClient.login(discordConfig.token)
 
 module.exports = main
