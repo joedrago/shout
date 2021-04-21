@@ -1,0 +1,6 @@
+{
+    "token": "YOUR_BOT_TOKEN_HERE",
+    "guild": "YOUR_SERVER_NUMERICAL_ID_HERE",
+    "channel": "YOUR_CHANNEL_NAME_HERE",
+    "interval": 3
+}
